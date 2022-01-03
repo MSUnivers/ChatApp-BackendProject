@@ -7,7 +7,7 @@ const { mainErrorHandler } = require("./middleware/errorHandler");
 /*Middlewares*/
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
+/** Routes */
 app.get("/", (req, res, next) => {
   res.send("Test");
 });
