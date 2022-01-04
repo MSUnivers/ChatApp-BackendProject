@@ -3,7 +3,7 @@ const app = express();
 require("dotenv").config();
 const mongoose = require("mongoose");
 
-const { mainErrorHandler } = require("./middleware/errorHandler");
+const { mainErrorHandler } = require("../middleware/errorHandler");
 /*Middlewares*/
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
