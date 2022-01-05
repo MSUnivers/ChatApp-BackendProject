@@ -1,5 +1,6 @@
 const User = require("../models/User");
 const { validationResult } = require("express-validator");
+const { compare } = require('../lib/encryption');
 
 /************ LIST OF USERS */
 async function getUsers(req, res, next) {
@@ -12,6 +13,17 @@ async function getUsers(req, res, next) {
     }
 }
 
+/************ GET USER */
+async function getUser(req, res, next) {
+    try {
+        const user = await User.findById(req.params.id);
+        if (!user) throw new createError.NotFound();
+        res.status(200).send(user);
+    } catch (error) {
+        next(error);
+    }
+}
+
 /************ REGISTER USER */
 async function registerUser(req, res, next) {
     try {
@@ -19,11 +31,14 @@ async function registerUser(req, res, next) {
         if (!errors.isEmpty()) {
             return res.status(400).send(errors);
         }
+        const {username, password, email} = req.body;
         const result = await User.create({
             username,
             password,
+            email
         });
-        res.status(200).send({result});
+        console.log(username)
+        res.status(201).send({result})
         
     } catch (error) {
         next(error);
@@ -81,4 +96,4 @@ async function loginUser(req, res, next) {
     }
 }
 
-module.exports = { getUsers, registerUser, updateUser, deleteUser, loginUser };
+module.exports = { getUsers, getUser, registerUser, updateUser, deleteUser, loginUser };
