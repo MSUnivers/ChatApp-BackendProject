@@ -41,21 +41,27 @@ io.on('connection', (socket) => {
     if (error) socket.emit('error')
    
     //send a message for every one
-    socket.emit('message', { user: 'admin', text: `${user.name}, welcome to the room ${user.room}` });
+    socket.emit('message', { user: 'admin', text: `${user.nameSo}, welcome to the room ${user.room}` });
     //send a message for every one besides the person he joined
     socket.broadcast.to(user.room).emit('message', { user: 'admin', text: `${user.name}, has joined` })
     socket.join(user.room);
+    io.to(user.room).emit('roomData',{room:user.room,users:getUserInRoom(user.room)})
 
   });
   socket.on('sendMessage', (message, cb) => {
     const user = getUser(socket.id)
     io.to(user.room).emit('message', { user: user.name, text: message });
+    //when a member leave a room we need to see the updated number of members in the room
+    io.to(user.room).emit('roomData', { user: user.room, users: getUserInRoom(user.room) });
     
     cb();
   })
   console.log('we have a new connection');
   socket.on('disconnected', () => {
-    console.log('user had left');
+    const user=removeUser(socket.id);
+    if(user) {
+      io.to(user.room).emit('message', { user: 'admin', text:`${user,nameSo} has left`})
+    }
   })
 }
 )
