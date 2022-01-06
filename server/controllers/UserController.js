@@ -26,7 +26,8 @@ async function getUser(req, res, next) {
 
 /************ REGISTER USER */
 async function registerUser(req, res, next) {
-    try {
+    res.send('test');
+   /*  try {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             return res.status(400).send(errors);
@@ -38,11 +39,11 @@ async function registerUser(req, res, next) {
             email
         });
         console.log(username)
-        res.status(201).send({result})
+        res.status(201).send('test')
         
     } catch (error) {
         next(error);
-        }
+        } */
 }
 
 /************ UPDATE USER */

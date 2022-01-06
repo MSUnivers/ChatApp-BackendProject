@@ -10,13 +10,16 @@ const {getUsers,
 
 
 router.route('/').get(getUsers)
-
+router.route('/test',(req,res)=>{
+    res.send('here is a test')
+    return
+})
 router.route('/:id')
         .get(getUser)
         .put(updateUser)
         .delete(deleteUser)
     
-router.route('/register').post(userValidators, registerUser);
+router.route('/register').post(registerUser);
 
 router.route('/login').post(loginUser);
 
