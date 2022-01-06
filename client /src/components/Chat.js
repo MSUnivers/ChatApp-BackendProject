@@ -3,6 +3,8 @@ import { useLocation } from "react-router-dom";
 import {ChatContext} from '../context/SharedContext'
 import queryString from "query-string";
 import io from "socket.io-client";
+import ScrollToBottom from 'react-scroll-to-bottom';
+import ReactEmoji from 'react-emoji'
 
 let socket;
 export default function Chat() {
@@ -39,6 +41,7 @@ export default function Chat() {
         }
     };
     console.log(message, messages);
+    console.log(message);
     return (
         <>
             <div>
@@ -50,12 +53,15 @@ export default function Chat() {
                
                 {messages.map((message,i) => {
                     return (
+                        <ScrollToBottom style={{height:'600px',width:'400px'}}>
                         <div key={i} style={{margin:'2rem'}}>
                             <span >
                                 {message.user}:   
                             </span>
-                            <span style={{border:'1px solid blue',borderRadius:'8px',background:'blue',color:'white',padding:'5px'}}>{message.text}</span>
+                            <span style={{border:'1px solid blue',borderRadius:'8px',background:'grey',color:'white',padding:'5px'}}>{ReactEmoji.emojify(message.text)}</span>
                         </div>
+                       
+                        </ScrollToBottom>
                     );
                 })}
                 
