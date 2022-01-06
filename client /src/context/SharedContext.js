@@ -8,7 +8,7 @@ export default function SharedContext({ children }) {
   const [user, setUser] = useState({
     name: "maroua",
   });
-  const [rooms, setRooms] = useState(["family", "travelling"]);
+  const [rooms, setRooms] = useState(["family-Room", "travelling"]);
   return (
     <ChatContext.Provider value={{ user, rooms }}>
       {children}

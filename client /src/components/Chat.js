@@ -45,23 +45,28 @@ export default function Chat() {
                 <h1>
                     welcome {user.name} in our {roomSo}{" "}
                 </h1>
-                <input
+               <div  style={{border: "1px solid grey",width:'50%'}}>
+                   
+               
+                {messages.map((message,i) => {
+                    return (
+                        <div key={i} style={{margin:'2rem'}}>
+                            <span >
+                                {message.user}:   
+                            </span>
+                            <span style={{border:'1px solid blue',borderRadius:'8px',background:'blue',color:'white',padding:'5px'}}>{message.text}</span>
+                        </div>
+                    );
+                })}
+                
+            </div>
+            <input
                     type="text"
                     placeholder="enter your message"
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                     onKeyPress={(e) => (e.key === "Enter" ? sendMessage(e) : console.log('error'))}
                 />
-                {messages.map((message) => {
-                    return (
-                        <div>
-                            <span>
-                                {message.user}:   
-                            </span>
-                            <span>{message.text}</span>
-                        </div>
-                    );
-                })}
             </div>
         </>
     );
