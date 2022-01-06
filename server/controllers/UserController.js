@@ -1,11 +1,11 @@
-const User = require("../models/User");
+const UserSchema = require("../models/User");
 const { validationResult } = require("express-validator");
 const { compare } = require('../lib/encryption');
 
 /************ LIST OF USERS */
 async function getUsers(req, res, next) {
     try {
-        const users = await User.find();
+        const users = await UserSchema.find();
         res.status(200).send(users);
 
     } catch (error) {
@@ -26,24 +26,24 @@ async function getUser(req, res, next) {
 
 /************ REGISTER USER */
 async function registerUser(req, res, next) {
-    res.send('test');
-   /*  try {
+    try {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             return res.status(400).send(errors);
         }
         const {username, password, email} = req.body;
-        const result = await User.create({
+        const newUser = new UserSchema({
             username,
             password,
             email
         });
+        await newUser.save();
         console.log(username)
         res.status(201).send('test')
         
     } catch (error) {
         next(error);
-        } */
+        }
 }
 
 /************ UPDATE USER */
@@ -75,7 +75,7 @@ async function deleteUser(req, res, next) {
 /************ LOGIN USER */
 async function loginUser(req, res, next) {
     //find a user with the given username
-    const user = await User.findOne().where('username').equals(req.body.username);
+    const user = await UserSchema.findOne().where('username').equals(req.body.username);
     //if there is no user in db with the given username
     if (user == null) {
         return res.status(404)
