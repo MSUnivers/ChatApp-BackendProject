@@ -4,6 +4,7 @@ require("dotenv").config();
 const cors = require("cors");
 const mongoose = require("mongoose");
 const usersRoute = require('./routes/usersRoute');
+const roomsRoute=require('./routes/roomsRoute');
 
 const { mainErrorHandler } = require("./middleware/errorHandler");
 
@@ -11,9 +12,11 @@ const { mainErrorHandler } = require("./middleware/errorHandler");
 /** MIDDLEWARES */
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+//app.use(cors());
 
 app.use('/users', usersRoute);
+app.use('/room',roomsRoute);
+
 
 
 
