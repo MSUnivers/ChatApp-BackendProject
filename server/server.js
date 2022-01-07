@@ -10,6 +10,7 @@ const { corsOptions, ioCors } = require("../server/middleware/security");
 const { getUser, getUserInRoom, addUser, removeUser } = require('./users')
 const { mainErrorHandler } = require("../server/middleware/errorHandler");
 const usersRoute = require('./routes/usersRoute');
+const roomsRoute=require('../server/routes/roomsRoute')
 const router = express.Router();
 /*Middlewares*/
 
@@ -18,7 +19,7 @@ app.use(cors())
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/users', usersRoute);
-
+app.use('/room',roomsRoute)
 
 /*SETUP DATABASE*/
 mongoose.connect(process.env.DB_URL);
@@ -31,10 +32,7 @@ mongoose.connection.once("open", () => {
 });
 
 
-app.get('/test',(req,res)=>{
-  res.send('here is a test')
-  return
-})
+
 
 /**Setup Socket io */
 const server = http.createServer(app)
