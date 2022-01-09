@@ -1,18 +1,18 @@
-const initialState = {
+export const initialState = {
     user: {
-        name: "maroua",
+        name: "",
       },
-      rooms: ["family", "travelling"],
+      rooms: [],
     
 };
 
-const reduce = (state = initialState, action) => {
+export const reduce = (state = initialState, action) => {
   switch (action.type) {
     case "AUTHENTICATED":
       return {
         ...state,
         user: {
-          name: "maroua",
+          name: action.payload,
         },
         rooms: ["family", "travelling"],
       };
@@ -21,5 +21,3 @@ const reduce = (state = initialState, action) => {
       return state;
   }
 };
-
-export {initialState,reduce}

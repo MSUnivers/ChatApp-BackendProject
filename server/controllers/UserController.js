@@ -86,7 +86,7 @@ async function loginUser(req, res, next) {
         //if plaintext password matched with hashed password
         if (await compare(req.body.password, user.password)) {
             res.status(200)
-                .send({ msg: 'You logged in successfully.', status: true })
+                .send({ msg: 'You logged in successfully.', status: true,user:user })
         } else {
             res.status(404)
                 .send({ msg: 'Username or password is wrong. Please try again.', status: false })

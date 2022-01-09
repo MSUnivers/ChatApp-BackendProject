@@ -3,14 +3,14 @@ import { initialState, reduce } from "../reducer/Reducer";
 export const ChatContext = createContext();
 
 export default function SharedContext({ children }) {
-  //const [state,dispatch]=useReducer(initialState,reduce)
+  const [state,dispatch]=useReducer(reduce,initialState)
 
-  const [user, setUser] = useState({
+ /*  const [user, setUser] = useState({
     name: "maroua",
   });
-  const [rooms, setRooms] = useState(["family", "travelling"]);
+  const [rooms, setRooms] = useState(["family", "travelling"]); */
   return (
-    <ChatContext.Provider value={{ user, rooms }}>
+    <ChatContext.Provider value={{ state, dispatch }}>
       {children}
     </ChatContext.Provider>
   );
