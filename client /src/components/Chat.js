@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import { ChatContext } from "../context/SharedContext";
 import queryString from "query-string";
 import io from "socket.io-client";
-
+import ReactEmoji from "react-emoji";
 let socket;
 export default function Chat() {
   const { state } = useContext(ChatContext);
@@ -62,7 +62,7 @@ export default function Chat() {
           return (
             <div>
               <span>{message.user}:</span>
-              <span>{message.text}</span>
+              <span>{ReactEmoji.emojify(message.text)}</span>
             </div>
           );
         })}
