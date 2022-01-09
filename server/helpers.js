@@ -1,5 +1,5 @@
 const users = [];
-const addUser = ({ id, name, room }) => {
+const addUser /**UserToRoom */= ({ id, name, room }) => {
     console.log(name);
     //JavaScript Mastery to javascriptmastery
     //name = name.trim().toLowerCase();

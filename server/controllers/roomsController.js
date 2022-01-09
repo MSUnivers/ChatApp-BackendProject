@@ -1,5 +1,7 @@
 const roomSchema = require('../models/room')
 const userSchema = require('../models/User')
+
+//create Room to be handled by the admin
 async function createRoom(req, res, next) {
     try {
         const room = req.body;
@@ -23,13 +25,17 @@ async function getRooms(req, res, next) {
 }
 
 async function getRoomById(req, res, next) {
+    try {
+        const roomId = req.params.rid;
+        const room = await roomSchema.findById(roomId);
+        res.status(200).send(room)
+    } catch (error) {
+        next(error)
+    }
 
 
 }
-async function updateRoomById(req, res, next) {
 
-
-}
 async function joinRoom(req, res, next) {
 
     try {
@@ -44,4 +50,4 @@ async function joinRoom(req, res, next) {
         next(error)
     }
 }
-module.exports = { createRoom, joinRoom, getRooms, getRoomById, updateRoomById };
+module.exports = { createRoom, joinRoom, getRooms, getRoomById };
