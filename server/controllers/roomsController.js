@@ -36,6 +36,16 @@ async function getRoomById(req, res, next) {
 
 }
 
+async function deleteRoomById(req, res, next) {
+    try {
+        const roomId = req.params.rid;
+        const result = await roomSchema.findByIdAndDelete(roomId);
+        res.status(200).send(result);
+    } catch (error) {
+        next(error)
+    }
+}
+
 async function joinRoom(req, res, next) {
 
     try {
@@ -50,4 +60,4 @@ async function joinRoom(req, res, next) {
         next(error)
     }
 }
-module.exports = { createRoom, joinRoom, getRooms, getRoomById };
+module.exports = { createRoom, joinRoom, getRooms, getRoomById, deleteRoomById };
