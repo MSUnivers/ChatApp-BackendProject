@@ -33,6 +33,7 @@ export default function Chat() {
   useEffect(() => {
     socket.on("message", (message) => {
       setMessages([...messages, message]);
+      console.log(messages);
     });
   }, [messages]);
 
