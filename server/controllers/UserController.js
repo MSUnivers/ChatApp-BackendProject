@@ -16,7 +16,7 @@ async function getUsers(req, res, next) {
 /************ GET USER */
 async function getUser(req, res, next) {
     try {
-        const user = await User.findById(req.params.id);
+        const user = await UserSchema.findById(req.params.id);
         if (!user) throw new createError.NotFound();
         res.status(200).send(user);
     } catch (error) {
@@ -51,7 +51,7 @@ async function updateUser(req, res, next) {
     const userId = req.params.uid;
 
     try {
-        const result = await User.findByIdAndUpdate(userId, req.body);
+        const result = await UserSchema.findByIdAndUpdate(userId, req.body);
         res.status(200).send(result);
     
     } catch (error) {
@@ -64,7 +64,7 @@ async function deleteUser(req, res, next) {
     const userId = req.params.uid;
 
     try {
-        const result = await User.findByIdAndDelete(userId);
+        const result = await UserSchema.findByIdAndDelete(userId);
         res.status(200).send(result);
 
     } catch (error) {
