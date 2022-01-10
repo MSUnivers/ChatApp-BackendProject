@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 require("dotenv").config();
 const mongoose = require("mongoose");
+
 const http = require("http");
 const socket = require("socket.io")
 const cors = require('cors')
@@ -29,6 +30,7 @@ mongoose.connection.on("error", (err) => {
 mongoose.connection.once("open", () => {
   console.log("connection established successfully!");
 });
+
 
 
 
@@ -70,6 +72,5 @@ app.use(mainErrorHandler);
 
 
 const port = process.env.PORT || 5000;
-server.listen(port, () => {
-  console.log("server is running on port: " + port);
+server.listen(port, () => {console.log("server is running on port: " + port);
 });
